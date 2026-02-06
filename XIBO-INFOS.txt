@@ -1,0 +1,95 @@
+docker exec -it xibo-docker-cms-web-1 php -r "echo password_hash('DEIN_PASSWORT', PASSWORD_BCRYPT).PHP_EOL;"
+
+
+
+
+docker-compose restart cms-web
+
+
+http://localhost:8080
+
+
+docker exec -it xibo-docker-cms-web-1 php -r "echo password_hash('812345', PASSWORD_BCRYPT).PHP_EOL;"
+
+
+
+docker exec -it xibo-docker-cms-db-1 mysql -u root -p
+
+USE xibo;
+
+INSERT INTO user (username, password, email, active, is_admin)
+VALUES ('admin', MD5('812345'), 'meine@mail.de', 1, 1);
+
+
+INSERT INTO user (username, email, active, is_admin, passwordhash)
+VALUES ('admin', 'meine@mail.de', 1, 1, '$2y$10$CwTycUXWue0Thq9StjUM0uJ8v1yHwZbBvq6K0eXp4G5GfTDPgA0Da');
+
+
+
+FLUSH PRIVILEGES;
+
+EXIT;
+
+
+docker-compose restart cms-web
+
+
+docker exec -it xibo-docker-cms-web-1 /var/www/cms/bin/install/create_admin_user.php
+
+<?php
+echo password_hash("812345", PASSWORD_BCRYPT);
+?>
+
+
+docker exec -it xibo-docker-cms-db-1 mysql -u root -p
+
+USE xibo;
+
+INSERT INTO user (username, email, active, is_admin, passwordhash)
+VALUES ('admin', 'meine@mail.de', 1, 1, '<hash>');
+
+
+
+FLUSH PRIVILEGES;
+
+EXIT;
+
+
+_______
+
+Zugangsdaten:
+
+xibo_admin
+Password:
+
+new Password: Code$_Xibo_2025
+new Password: Code$_Xibo_2026
+
+
+Und die Wert in userPassword ist gerade:
+
+5f4dcc3b5aa765d61d8327deb882cf99
+
+$2b$12$GQF/f94OF/EQIBChk7tDzuN.d2VGFMvpjQtBNrOqHqe3i5pA.IvBi
+
+
+________________________
+
+Wiederherstellungscode 2- Faktor Auth
+
+d299cdbd9be7fae0f9d6d6b1051008d71cc05adac52f92e190
+6d86dcb2016be98e50218702149d1a8a2eb15e88b6584c909a
+9f465827ef821ec22604ea5489fde724c2a66628f7267b471b
+2848f33de938236b0b17dcaa98b767e3f35f961c1cda18ae3e
+
+
+____________________________
+
+docker exec -it xibo-docker-cms-web-1 php /var/www/cms/bin/xibo-reset-password admin Code$_Xibo_2026
+
+
+http://localhost:8082/login
+
+http://localhost:8081/index.php?route=/table/change&db=xibo&table=user&where_clause=%60user%60.%60userId%60+%3D+1&where_clause_signature=285d3120020159d59663b1d3d917001841b88415d3c06113ae531770f499c176&clause_is_unique=1&sql_query=SELECT+%2A+FROM+%60user%60&sql_signature=7dd83156b088c203ee57a77864f091fd52c826d89a5e6bb0e6dc542bb15e73b2&goto=index.php%3Froute%3D%2Fsql&default_action=update
+
+

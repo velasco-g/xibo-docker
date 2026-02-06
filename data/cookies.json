@@ -1,0 +1,32 @@
+[
+  {
+    "name": "__Host-authjs.csrf-token",
+    "value": "1c860b504eeb9006f6f935d396a44c0381ba674449bcbede0cbf98daab3a7b6c%7Cd9f68f72afa308ec606737246ae19c80a3c249a7854dd7ed1379712f77c6113d",
+    "domain": "mpa.noventa-consulting.com",
+    "path": "/",
+    "expires": -1,
+    "size": 155,
+    "httpOnly": true,
+    "secure": true,
+    "session": true,
+    "sameSite": "Lax",
+    "priority": "Medium",
+    "sameParty": false,
+    "sourceScheme": "Secure"
+  },
+  {
+    "name": "__Secure-authjs.callback-url",
+    "value": "https%3A%2F%2Fmpa.noventa-consulting.com",
+    "domain": "mpa.noventa-consulting.com",
+    "path": "/",
+    "expires": -1,
+    "size": 68,
+    "httpOnly": true,
+    "secure": true,
+    "session": true,
+    "sameSite": "Lax",
+    "priority": "Medium",
+    "sameParty": false,
+    "sourceScheme": "Secure"
+  }
+]

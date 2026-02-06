@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>MPA Leitstand</title>
+<meta http-equiv="Cache-Control" content="no-store" />
+
+<style>
+  body {
+    margin: 0;
+    background: #111;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  #screen {
+    width: 100vw;
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    display: block;
+  }
+
+  #version {
+    position: fixed;
+    top: 4px;
+    left: 4px;
+    padding: 4px 6px;
+    background:#000;
+    color:#0f0;
+    font-size:12px;
+    z-index: 9999;
+    font-family: monospace;
+  }
+</style>
+
+</head>
+
+<body>
+
+<div id="version">Bridge v2.0 – Smooth Fade</div>
+
+<img id="screen" src="" alt="loading...">
+
+<script>
+function loadImage() {
+  const img = document.getElementById("screen");
+  const tmp = new Image();
+  const newSrc = "/bridge-image?_=" + Date.now();
+
+  tmp.onload = () => {
+    img.style.opacity = 0;
+    setTimeout(() => {
+      img.src = newSrc;
+      img.style.opacity = 1;
+    }, 80);
+  };
+
+  tmp.src = newSrc;
+}
+
+loadImage();
+setInterval(loadImage, 3000); // alle 3 Sekunden neues Bild
+</script>
+
+</body>
+</html>

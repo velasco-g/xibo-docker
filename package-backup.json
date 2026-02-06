@@ -1,0 +1,15 @@
+{
+  "name": "xibo-puppeteer-bridge",
+  "version": "1.0.0",
+  "main": "bridge.js",
+  "scripts": {
+    "start": "node bridge.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "ejs": "^4.0.1",
+    "express": "^4.18.2",
+    "fs-extra": "^11.3.2",
+    "puppeteer": "^23.0.0"
+  }
+}

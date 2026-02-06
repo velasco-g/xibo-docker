@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Montage Performance App – Leitstand</title>
+
+  <!-- Externes CSS -->
+  <link rel="stylesheet" href="/style.css?v=1" />
+</head>
+<body>
+  <h1>Montage Performance App – Leitstand</h1>
+
+  <div class="grid" id="dashboard"></div>
+  <div id="errorMsg"></div>
+
+  <!-- Variante A: Externe JS-Datei (empfohlen) -->
+  <script src="/app.js?v=1"></script>
+
+  <!--
+  Variante B: Inline-JS (falls du keine separate app.js willst)
+  <script>
+    async function loadData() {
+      try {
+        const res = await fetch('/bridge-json?_=' + Date.now());
+        if (!res.ok) throw new Error('Fehler beim Laden');
+        const data = await res.json();
+
+        const dashboard = document.getElementById('dashboard');
+        dashboard.innerHTML = '';
+
+        data.forEach(d => {
+          const perfClass = (d.performance || '').trim().startsWith('+') ? 'positive' : 'negative';
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <h2>${d.line ?? '-'}</h2>
+            <div class="status ${perfClass}">
+              Performance: ${d.performance ?? '-'}
+            </div>
+            <div class="details">
+              Produkt: ${d.product ?? '-'}<br>
+              Stückzahl: ${d.count ?? 0} (Gesamt: ${d.sum ?? 0})<br>
+              Start: ${d.start ?? '-'}<br>
+              Störungen: ${d.issues ?? '—'}<br>
+              Aktuelle Störung: ${d.currentIssue || 'Keine'}
+            </div>
+          `;
+          dashboard.appendChild(card);
+        });
+
+        document.getElementById('errorMsg').style.display = 'none';
+      } catch (err) {
+        const error = document.getElementById('errorMsg');
+        error.style.display = 'block';
+        error.textContent = "Fehler: " + err.message;

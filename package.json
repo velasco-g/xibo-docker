@@ -1,0 +1,19 @@
+
+{
+  "name": "xibo-puppeteer-bridge",
+  "version": "2.1.0",
+  "description": "Xibo Bridge: Puppeteer Login + Screenshot als Bildstream",
+  "main": "bridge.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node bridge.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "fs-extra": "^11.2.0",
+    "puppeteer": "^22.4.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

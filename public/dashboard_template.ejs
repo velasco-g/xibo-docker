@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>MPA Leitstand</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <h1>Montage Performance – Leitstand</h1>
+
+  <div class="grid">
+    <% data.forEach(d => { %>
+      <div class="card">
+        <h2><%= d.line %></h2>
+
+        <div class="item">
+          <strong>Produkt:</strong> <%= d.product %>
+        </div>
+
+        <div class="item">
+          <strong>Stückzahl:</strong> <%= d.number %>
+        </div>
+
+        <div class="item performance <%= d.performance.startsWith('+') ? 'pos' : d.performance.startsWith('-') ? 'neg' : '' %>">
+          <strong>Performance:</strong> <%= d.performance %>
+        </div>
+
+        <div class="item">
+          <strong>Summe:</strong> <%= d.sum %>
+        </div>
+
+        <div class="item">
+          <strong>Startzeit:</strong> <%= d.start %>
+        </div>
+
+        <div class="item">
+          <strong>Störungen:</strong> <%= d.issues %>
+        </div>
+      </div>
+
+    <% }); %>
+  </div>
+
+  <script>
+    setTimeout(() => location.reload(), 20000);
+  </script>
+</body>
+</html>

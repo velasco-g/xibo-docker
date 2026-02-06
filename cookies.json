@@ -1,0 +1,47 @@
+[
+  {
+    "name": "__Secure-authjs.session-token",
+    "value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwia2lkIjoia3cwME9xZXFJblhUY2IzSS12X1hBVEdFNzJlbDNjdVo5THUzenpUdWVyelpsREVabDdWMFYwWDBiRXNmZHc1bm9oMFcxckU4bUl5NmhudW92QUpaX3cifQ..pZC-p2Uu16PtoMOFMW8puA.ZpN70xw1fD4jUkWEpkJbQCb9sM8Mfgmke8JHLl8aK2YKXlHOLqpSugxovfk6_ATnRiDJ5vMA2VfjfdHak6QVE_AtgFjWbO2mVX-nk8R6N33t-UBthP8BgnaN7QMP_tNrmrZkjTYjkfv3jzOXCOhOh_tCzhJG3SUxtVJqEANCCDwuIMPFmQB2393GDhgZNMoAaVKCWbU0gOjObmdoJnLkBvdMKsIDIav75GidVO1Cyc1PkPeLIJmR8k5DBlBYj_RnW0DxvnoZ37_m8w3RLh1IKvFRnuHmAT5OFhR2HpybK4g.EkYN9uuqXfG97dnoi9tZO_GkUDLCYMpuHveHJ6endZM",
+    "domain": "mpa.noventa-consulting.com",
+    "path": "/",
+    "expires": 1768122305.568619,
+    "size": 571,
+    "httpOnly": true,
+    "secure": true,
+    "session": false,
+    "sameSite": "Lax",
+    "priority": "Medium",
+    "sameParty": false,
+    "sourceScheme": "Secure"
+  },
+  {
+    "name": "__Secure-authjs.callback-url",
+    "value": "https%3A%2F%2Fmpa.noventa-consulting.com%2Flogin",
+    "domain": "mpa.noventa-consulting.com",
+    "path": "/",
+    "expires": -1,
+    "size": 76,
+    "httpOnly": true,
+    "secure": true,
+    "session": true,
+    "sameSite": "Lax",
+    "priority": "Medium",
+    "sameParty": false,
+    "sourceScheme": "Secure"
+  },
+  {
+    "name": "__Host-authjs.csrf-token",
+    "value": "38359472644be3cdeef5847f69fa266f66f0190607619e491b51fdb7e693abdd%7C048b59d55d4666ad89909130203b0d8200dd932ccb837ca65f367a33f18c8ffb",
+    "domain": "mpa.noventa-consulting.com",
+    "path": "/",
+    "expires": -1,
+    "size": 155,
+    "httpOnly": true,
+    "secure": true,
+    "session": true,
+    "sameSite": "Lax",
+    "priority": "Medium",
+    "sameParty": false,
+    "sourceScheme": "Secure"
+  }
+]
