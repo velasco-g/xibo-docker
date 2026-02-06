@@ -1,0 +1,79 @@
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.line-box {
+  background: rgba(0,0,0,0.3);
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  font-family: Inter, sans-serif;
+}
+
+.box-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.box-product {
+  opacity: 0.75;
+  margin-bottom: 12px;
+}
+
+.box-main-count {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.box-diff {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.box-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.label {
+  opacity: 0.7;
+}
+
+.value {
+  font-weight: 600;
+}
+
+
+<div class="line-box">
+  <div class="box-title">MMCS RU Prüfen-Verpacken</div>
+  <div class="box-product">MMCS Leadset ohne SpO2</div>
+
+  <div class="box-main-count">15</div>
+  <div class="box-diff">+44%, Summe 49</div>
+
+  <div class="box-row">
+    <span class="label">Start Produktion:</span>
+    <span class="value">13:03</span>
+  </div>
+
+  <div class="box-row">
+    <span class="label">Summe Störungen:</span>
+    <span class="value">15m 39s</span>
+  </div>
+
+  <div class="box-row">
+    <span class="label">Aktive Mitarbeiter:</span>
+    <span class="value">1</span>
+  </div>
+
+  <div class="box-row">
+    <span class="label">Aktive Störung:</span>
+    <span class="value">Linien An- / Auslauf</span>
+  </div>
+</div>
