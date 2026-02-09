@@ -117,7 +117,8 @@ services:
       - bridge_data:/data
 
     ports:
-      - "4000:3000"
+      - "4100:3500"
+
 
     depends_on:
       cms-web:
