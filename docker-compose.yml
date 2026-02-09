@@ -1,140 +1,25 @@
+version: "3.9"
+
 services:
-
-  #################################################
-  # MYSQL DATABASE
-  #################################################
-  cms-db:
-    image: mysql:8.0
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: 812345
-      MYSQL_DATABASE: xibo
-      MYSQL_USER: xibo
-      MYSQL_PASSWORD: 812345
-    command: >
-      --character-set-server=utf8mb4
-      --collation-server=utf8mb4_unicode_ci
-      --innodb_file_per_table=1
-      --default_authentication_plugin=mysql_native_password
-      --sql_mode=""
-    volumes:
-      - db_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uxibo -p812345 || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 12
-      start_period: 25s
-
-
-  #################################################
-  # XIBO CMS WEB
-  #################################################
-  cms-web:
-    image: ghcr.io/xibosignage/xibo-cms:release-4.3.1
-    restart: unless-stopped
-    environment:
-      MYSQL_HOST: cms-db
-      MYSQL_DATABASE: xibo
-      MYSQL_USER: xibo
-      MYSQL_PASSWORD: 812345
-      CMS_SERVER_NAME: localhost
-      TZ: Europe/Berlin
-      PHP_MEMORY_LIMIT: 512M
-      UPLOAD_MAX_FILESIZE: 128M
-      POST_MAX_SIZE: 128M
-    ports:
-      - "8082:80"
-    depends_on:
-      cms-db:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost/ || exit 1"]
-      interval: 15s
-      timeout: 5s
-      retries: 20
-      start_period: 35s
-
-
-  #################################################
-  # XMR
-  #################################################
-  cms-xmr:
-    image: ghcr.io/xibosignage/xibo-xmr:1.0
-    restart: unless-stopped
-    ports:
-      - "9505:9505"
-    healthcheck:
-      test: ["CMD", "bash", "-lc", "ss -lnt | grep -q ':9505'"]
-      interval: 15s
-      timeout: 5s
-      retries: 10
-      start_period: 15s
-
-
-  #################################################
-  # MEMCACHED
-  #################################################
-  cms-memcached:
-    image: memcached:alpine
-    restart: unless-stopped
-
-
-  #################################################
-  # PHPMYADMIN
-  #################################################
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    restart: unless-stopped
-    environment:
-      PMA_HOST: cms-db
-      PMA_PORT: 3306
-      PMA_USER: xibo
-      PMA_PASSWORD: 812345
-    ports:
-      - "8081:80"
-    depends_on:
-      cms-db:
-        condition: service_healthy
-
-
-  #################################################
-  # PUPPETEER BRIDGE (deine bridge.js)
-  #################################################
   xibo-puppeteer-bridge:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: xibo-puppeteer-bridge
     restart: unless-stopped
-
     env_file:
       - ./bridge.env
-
     volumes:
       - bridge_data:/data
-
     ports:
       - "4100:3500"
-
-
-    depends_on:
-      cms-web:
-        condition: service_started
-
+    user: "10001:10001"
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/health || exit 1"]
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3500/health || exit 1"]
       interval: 15s
       timeout: 5s
       retries: 10
-      start_period: 35s
+      start_period: 20s
 
-
-#################################################
-# VOLUMES
-#################################################
 volumes:
-  db_data:
   bridge_data:

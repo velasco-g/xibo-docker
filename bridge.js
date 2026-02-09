@@ -64,10 +64,13 @@ let browser = null;
 async function getBrowser() {
   if (browser && browser.isConnected()) return browser;
 
+  console.log("Puppeteer startet Chrome, Headless:", process.env.HEADLESS);
+  console.log("Cache-Verzeichnis:", process.env.PUPPETEER_CACHE_DIR);
+
   try {
     browser = await puppeteer.launch({
-      headless: "new",
-      userDataDir: "/data/puppeteer",  // persistenter Chromium-Profile
+      headless: process.env.HEADLESS !== "false",
+      userDataDir: "/data/puppeteer",
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
@@ -153,9 +156,7 @@ async function captureScreenshot() {
 
 // Routes
 app.get("/", (_, res) => res.redirect("/bridge"));
-
 app.get("/bridge", (_, res) => res.send(renderBridgeHTML()));
-
 app.get("/bridge-image", async (_, res) => {
   try {
     const img = await captureScreenshot();
@@ -166,7 +167,6 @@ app.get("/bridge-image", async (_, res) => {
     res.send(renderBridgeHTML("❌ Fehler: " + err.message));
   }
 });
-
 app.get("/health", (_, res) => res.json({ ok: true, time: new Date().toISOString() }));
 
 app.listen(PORT, "0.0.0.0", () => {
