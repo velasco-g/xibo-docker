@@ -69,16 +69,18 @@ async function getBrowser() {
 
   try {
     browser = await puppeteer.launch({
-      headless: process.env.HEADLESS !== "false",
-      userDataDir: "/data/puppeteer",
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-gpu",
-        "--window-size=2560,1440",
-      ],
-    });
+  headless: true,
+  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH, // nutzt den installierten Browser
+  userDataDir: "/data/puppeteer",
+  args: [
+    "--no-sandbox",
+    "--disable-setuid-sandbox",
+    "--disable-dev-shm-usage",
+    "--disable-gpu",
+    "--window-size=2560,1440",
+    "--disable-features=VizDisplayCompositor",
+  ],
+});
     browser.on("disconnected", () => { browser = null; });
     console.log("Puppeteer: Chrome gestartet ✅");
     return browser;

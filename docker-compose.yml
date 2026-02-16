@@ -9,8 +9,6 @@ services:
     restart: unless-stopped
     env_file:
       - ./bridge.env
-    volumes:
-      - bridge_data:/data
     ports:
       - "4100:3500"
     user: "10001:10001"
@@ -23,3 +21,5 @@ services:
 
 volumes:
   bridge_data:
+  puppeteer_cache:
+
